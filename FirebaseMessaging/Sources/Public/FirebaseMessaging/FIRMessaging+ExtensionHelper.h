@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class GULCCComponentContainer;
+#import "FIRMessaging.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Do not use directly. A placeholder type in order to provide a macro that will warn users of
-/// mis-matched protocols.
-NS_SWIFT_NAME(ComponentType)
-@interface GULCCComponentType<__covariant T> : NSObject
+@class FIRMessagingExtensionHelper;
 
-/// Do not use directly. A factory method to retrieve an instance that provides a specific
-/// functionality.
-+ (T)instanceForProtocol:(Protocol *)protocol inContainer:(GULCCComponentContainer *)container;
+@interface FIRMessaging (ExtensionHelper)
+
+/**
+ * Use the MessagingExtensionHelper to populate rich UI content for your notifications.
+ * For example, if an image URL is set in your notification payload or on the console,
+ * you can use the MessagingExtensionHelper instance returned from this method to render
+ * the image in your notification.
+ *
+ * @return An instance of MessagingExtensionHelper that handles the extensions API.
+ */
++ (FIRMessagingExtensionHelper *)extensionHelper NS_SWIFT_NAME(serviceExtension());
 
 @end
 

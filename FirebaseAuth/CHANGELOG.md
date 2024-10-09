@@ -1,3 +1,17 @@
+# Unreleased
+- [Fixed] Restore Firebase 10 behavior by ignoring `nil` display names used
+  during multi factor enrollment. (#13856)
+
+# 11.3.0
+- [Fixed] Restore Firebase 10 behavior by querying with the
+  `kSecAttrSynchronizable` key when auth state is set to be shared across
+  devices. (#13584)
+- [Fixed] Prevent a bad memory access crash by using non-ObjC, native Swift
+  types in the SDK's networking layer, and moving synchronous work off of
+  the shared Swift concurrency queue. (#13650)
+- [Fixed] Restore Firebase 10 behavior by forwarding errors from interrupted
+  reCAPTCHA or OIDC login flows. (#13645)
+
 # 11.2.0
 - [Fixed] Fixed crashes that could occur in Swift continuation blocks running in the Xcode 16
   betas. (#13480)
@@ -7,6 +21,9 @@
   in methods and a `nil` error. In such cases, an empty array is instead
   returned with the `nil` error. (#13550)
 - [Fixed] Fixed user session persistence in multi tenant projects. Introduced in 11.0.0. (#13565)
+- [Fixed] Fixed encoding crash that occurs when using TOTP multi-factor
+  authentication. Note that this fix will not be in the 11.2.0 zip and Carthage
+  distributions, but will be included from 11.3.0 onwards. (#13591)
 
 # 11.1.0
 - [fixed] Fixed `Swift.error` conformance for `AuthErrorCode`. (#13430)

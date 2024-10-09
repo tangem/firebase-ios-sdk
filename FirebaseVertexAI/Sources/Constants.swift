@@ -14,12 +14,11 @@
 
 import Foundation
 
-#if !os(macOS) && !os(iOS)
-  #warning("Only iOS, macOS, and Catalyst targets are currently fully supported.")
-#endif
-
 /// Constants associated with the Vertex AI for Firebase SDK.
 enum Constants {
   /// The Vertex AI backend endpoint URL.
+  ///
+  /// TODO(andrewheard): Update to "https://firebasevertexai.googleapis.com" after the Vertex AI in
+  /// Firebase API launch.
   static let baseURL = "https://firebaseml.googleapis.com"
 }

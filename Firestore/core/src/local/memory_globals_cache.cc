@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,20 @@
  * limitations under the License.
  */
 
-#import "Public/GULCCComponentType.h"
+#include "Firestore/core/src/local/memory_globals_cache.h"
 
-#import "Private/GULCCComponentContainerInternal.h"
+namespace firebase {
+namespace firestore {
+namespace local {
 
-@implementation GULCCComponentType
-
-+ (id)instanceForProtocol:(Protocol *)protocol inContainer:(GULCCComponentContainer *)container {
-  // Forward the call to the container.
-  return [container instanceForProtocol:protocol];
+ByteString MemoryGlobalsCache::GetSessionToken() const {
+  return session_token_;
 }
 
-@end
+void MemoryGlobalsCache::SetSessionToken(const ByteString& session_token) {
+  session_token_ = session_token;
+}
+
+}  // namespace local
+}  // namespace firestore
+}  // namespace firebase
