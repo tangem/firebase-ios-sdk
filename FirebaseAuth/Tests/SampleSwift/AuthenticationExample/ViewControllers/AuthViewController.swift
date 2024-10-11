@@ -340,7 +340,7 @@ class AuthViewController: UIViewController, DataSourceProviderDelegate {
   }
 
   private func performDemoEmailPasswordLoginFlow() {
-    let loginView = LoginViewSwiftUI()
+    let loginView = LoginView()
     let hostingController = UIHostingController(rootView: loginView)
     navigationController?.pushViewController(hostingController, animated: true)
   }
