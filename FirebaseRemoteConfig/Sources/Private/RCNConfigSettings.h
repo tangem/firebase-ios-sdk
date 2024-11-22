@@ -21,7 +21,7 @@
 @class RCNConfigDBManager;
 
 /// This internal class contains a set of variables that are unique among all the config instances.
-/// It also handles all metadata and internal metadata. This class is not thread safe and does not
+/// It also handles all metadata. This class is not thread safe and does not
 /// inherently allow for synchronized access. Callers are responsible for synchronization
 /// (currently using serial dispatch queues).
 @interface RCNConfigSettings : NSObject
@@ -55,11 +55,6 @@
 /// Custom variable (aka App context digest). This is the pending custom variables request before
 /// fetching.
 @property(nonatomic, copy) NSDictionary *customVariables;
-/// Cached internal metadata from internal metadata table. It contains customized information such
-/// as HTTP connection timeout, HTTP read timeout, success/failure throttling rate and time
-/// interval. Client has the default value of each parameters, they are only saved in
-/// internalMetadata if they have been customize by developers.
-@property(nonatomic, readonly, copy) NSDictionary *internalMetadata;
 /// Device conditions since last successful fetch from the backend. Device conditions including
 /// app
 /// version, iOS version, device localte, language, GMP project ID and Game project ID. Used for
@@ -113,6 +108,12 @@
                         firebaseAppName:(NSString *)appName
                             googleAppID:(NSString *)googleAppID;
 
+- (instancetype)initWithDatabaseManager:(RCNConfigDBManager *)manager
+                              namespace:(NSString *)FIRNamespace
+                        firebaseAppName:(NSString *)appName
+                            googleAppID:(NSString *)googleAppID
+                           userDefaults:(NSUserDefaults *)userDefaults;
+
 /// Returns a fetch request with the latest device and config change.
 /// Whenever user issues a fetch api call, collect the latest request.
 /// @param userProperties  User properties to set to config request.
@@ -120,10 +121,7 @@
 - (NSString *)nextRequestWithUserProperties:(NSDictionary *)userProperties;
 
 /// Returns metadata from metadata table.
-- (NSDictionary *)loadConfigFromMetadataTable;
-
-/// Updates internal content with the latest successful config response.
-- (void)updateInternalContentWithResponse:(NSDictionary *)response;
+- (void)loadConfigFromMetadataTable;
 
 /// Updates the metadata table with the current fetch status.
 /// @param fetchSuccess True if fetch was successful.
