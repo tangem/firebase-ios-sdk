@@ -132,8 +132,8 @@ let package = Package(
       "2.4.0" ..< "3.0.0"
     ),
     .package(
-      url: "https://github.com/apple/swift-protobuf.git",
-      "1.19.0" ..< "2.0.0"
+      url: "https://github.com/tangem/swift-protobuf-binaries.git",
+      .upToNextMajor(from: "1.25.2-tangem1")
     ),
     googleAppMeasurementDependency(),
     .package(
@@ -800,7 +800,7 @@ let package = Package(
         "FirebaseInstallations",
         .product(name: "GoogleDataTransport", package: "GoogleDataTransport"),
         .product(name: "GULUserDefaults", package: "GoogleUtilities"),
-        .product(name: "SwiftProtobuf", package: "swift-protobuf"),
+        .product(name: "SwiftProtobuf", package: "swift-protobuf-binaries"),
       ],
       path: "FirebaseMLModelDownloader/Sources",
       exclude: [
