@@ -132,7 +132,7 @@ let package = Package(
       "2.4.0" ..< "3.0.0"
     ),
     .package(
-      url: "https://github.com/tangem/swift-protobuf-binaries.git",
+      url: "git@github.com:tangem-developments/swift-protobuf-binaries.git",
       .upToNextMajor(from: "1.25.2-tangem1")
     ),
     googleAppMeasurementDependency(),
