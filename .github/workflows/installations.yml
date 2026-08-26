@@ -124,7 +124,12 @@ jobs:
           FirebaseInstallations/Source/Tests/Resources/GoogleService-Info.plist "$plist_secret"
     - name: Get boolean for secrets available
       id: secrets
-      run: echo "::set-output name=val::$([[ -z $plist_secret ]] && echo "0" || echo "1")"
+      run: |
+        if [[ -z "$plist_secret" ]]; then
+          echo "val=0" >> "$GITHUB_OUTPUT"
+        else
+          echo "val=1" >> "$GITHUB_OUTPUT"
+        fi
     - name: PodLibLint Installations Cron
       run: |
        export FIS_INTEGRATION_TESTS_REQUIRED=${{ steps.secrets.outputs.val }}

@@ -40,7 +40,7 @@ jobs:
       run: |
         cd "${GITHUB_WORKSPACE}/ReleaseTooling"
         swift run manifest --sdk-repo-url "${GITHUB_WORKSPACE}" --output-file-path ./output.json --for-gha-matrix-generation
-        echo "::set-output name=matrix::{\"include\":$( cat output.json )}"
+        echo "matrix={\"include\":$(cat output.json)}" >> "$GITHUB_OUTPUT"
     - name: Update SpecsTesting repo setup
       run: |
          podspec_repo_branch="${podspec_repo_branch}" \
